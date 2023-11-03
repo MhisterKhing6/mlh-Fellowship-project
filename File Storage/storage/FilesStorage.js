@@ -18,9 +18,7 @@ export class FileStorage {
         @param {originalFileName} : Specifiy the original file name of the file, helps in getting the file extension 
         @param {type}       : specify type of the file
      */
-    constructor(FilePath, data, originalFileName, type=null) {
-        this.localPath = null
-        this.type = type
+    constructor(FilePath, data, originalFileName) {
         this.fileFolder = path.join("./public/" + FilePath)
         this.data = data
         this.originalFileName = originalFileName
@@ -38,7 +36,7 @@ export class FileStorage {
                 if (extension) {
                 //Generate a local name
                 let filenName = new ObjectId().toString() + "." + extension
-                 this.localPath = path.join(this.fileFolder, filenName)
+                this.localPath = path.join(this.fileFolder, filenName)
                 //writing the file
                 //generate the binary data from the file
                 let dataStream = Buffer.from(this.data, "base64url")
@@ -46,7 +44,7 @@ export class FileStorage {
                 await writfileAsync(this.localPath, dataStream)
                 return {completed:true, "path": this.localPath };
                 } else {
-                    return {completed: false, message: "cant determine the type of file, check originalFileName param"}
+                    return {completed: false, message: "cant determine the type of file", tip: "ensure the fileName field include extension, example file.txt and not file"}
                 }
 
         }catch(err){

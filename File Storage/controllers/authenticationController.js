@@ -1,10 +1,9 @@
 import { response } from "express"
 import storage from "../storage/mongodb.js"
 import RedisCatch from "../storage/redis.js"
-import { mandatoryUserFields, getCookie, getUserIdfromCookie } from "./control Codes/commonVerification.js"
+import { mandatoryFields, getCookie, getUserIdfromCookie } from "./control Codes/commonVerification.js"
 import { generateToken } from "./control Codes/commonVerification.js"
 import sha1 from "sha1"
-import { use } from "chai"
 //Using token Authentication
 
 export default class AuthenticationController {
@@ -12,7 +11,7 @@ export default class AuthenticationController {
         let credentials = req.body //Get user credentials
          //check if all the required filds are given
         let requiredFields = ["email", "password"]
-        let notGiven = mandatoryUserFields(requiredFields, credentials)
+        let notGiven = mandatoryFields(requiredFields, credentials)
         if(notGiven.length != 0) {
             res.status(201).json({"message": "Fields Missing", "requiredFields": notGiven})
         } else {

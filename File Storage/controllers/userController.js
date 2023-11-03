@@ -1,8 +1,9 @@
 import storage from "../storage/mongodb.js"
 import { ObjectId } from "mongodb";
 import sha1 from "sha1";
-import { mandatoryUserFields } from "./control Codes/commonVerification.js";
+import { mandatoryFields } from "./control Codes/commonVerification.js";
 import { FileStorage } from "../storage/FilesStorage.js";
+import { generateToken } from "./control Codes/commonVerification.js";
 
 /* Handles user controller actions */
 
@@ -10,14 +11,14 @@ export default class UserController{
 
     static async addUser(req, res) {
         /*
-         handles adding user from the front end 
+         handles the creation of new user
             route-type: public
             http-methode: post
             @param {req} : user http request
             @param (res):  server htpp respons
         */ 
         let user = await req.body;
-        let notGiven = mandatoryUserFields(["email", "password", "name"], user);
+        let notGiven = mandatoryFields(["email", "password", "name"], user);
         if (notGiven.length === 0) {
             //save user information in the database
             try {
@@ -43,7 +44,8 @@ export default class UserController{
                     
                 }
                 //Add unique id
-                user.id = new ObjectId().toString()
+                user.id = generateToken()
+                user.token = generateToken()
                 user.password = sha1(user.password)
                 await storage.addUser(user);
                 res.status(200).json({"status": "created", "id":user.id, profile_Pic_Save_Status: profile_Pic_Save_Status.status ? profile_Pic_Save_Status : "Not Given" });

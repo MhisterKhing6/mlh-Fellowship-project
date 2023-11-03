@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb"
-import Catch from  "../../storage/redis.js"
 
 export function generateToken() {
     //get the authentication
@@ -7,14 +6,14 @@ export function generateToken() {
 }
 
 
-export function mandatoryUserFields(requiredFields, user) {
-    let notGiven = [];
+export function mandatoryFields(requiredFields, givenFilds) {
+    let missing = [];
     for(const field of requiredFields) {
-        if (!Object.keys(user).includes(field) || (user[field] === "")) {
-            notGiven.push(field)
+        if (!Object.keys(givenFilds).includes(field) || (user[givenFilds] === "")) {
+            missing.push(field)
         }
     }
-    return notGiven
+    return missing
 }
 
 export function getCookie(req) {
