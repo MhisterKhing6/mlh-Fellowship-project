@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "test": "pkill -sigkill node; mocha "
   },
   "author": "",
   "license": "ISC",

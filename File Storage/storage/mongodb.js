@@ -18,13 +18,14 @@ class Storage {
     getStatus = async ()=> {
         return this.isAlive ? true : false;
     }
-    
-    addFile = async (fileDetails) => this.database.collection("Files").insertOne(fileDetails)
+
     truncatCollection = async (confirmation = false) => confirmation ? this.database.collection("Users").deleteMany() : {"confirmation": "false"}
+    
     //File Operations
     addFile = async(collection, file) => this.database.collection(collection).insertOne(file)
     getFile = async (collection, fileQuery) => this.database.collection(collection).findOne(fileQuery)
-}
+    
+}   
 
 
 

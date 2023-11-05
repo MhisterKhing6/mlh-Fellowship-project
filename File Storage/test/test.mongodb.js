@@ -1,7 +1,6 @@
 import chai from "chai";
 import storage from "../storage/mongodb.js"
 import { FileStorage } from "../storage/FilesStorage.js";
-import { assert } from "console";
 
 describe("mongo storage requirements", function (){
     it("insert data into the database",async function () { 
@@ -56,8 +55,8 @@ describe("mongo storage requirements", function (){
         it("getting file from a database", async function () {
             let diskSave = await file.saveFile()
             //insert the file into the database
-            await storage.addFile("test", {"path": diskSave.localPath})
-            let test = await storage.getFile("test", {"path": diskSave.localPath})
+            await storage.addFile("test",{"path": diskSave.localPath})
+            let test = await storage.getFile("test" , {"path": diskSave.localPath})
             chai.assert.equal(diskSave.localPath,test.path)
             
         })

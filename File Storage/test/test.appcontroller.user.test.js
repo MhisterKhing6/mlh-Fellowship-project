@@ -1,15 +1,15 @@
 import chai from "chai";
-import  { mandatoryUserFields, getCookie, getUserIdfromCookie} from "../controllers/control Codes/commonVerification.js";
+import  { mandatoryFields, getCookie, getUserIdfromCookie} from "../controllers/control Codes/commonVerification.js";
 import redisCatch from "../storage/redis.js"
 describe("user controller test", function () { 
     it("mandatory fileds", function (){
         let requiredFields = ["email", "password", "name"];
         let user = {"name": "Kofi Asare", "password": "Ama", "email":"kofi@gmail.com"}
-        chai.assert.equal(mandatoryUserFields(requiredFields, user).length, 0);
+        chai.assert.equal(mandatoryFields(requiredFields, user).length, 0);
         user.name = ""
-        chai.assert.equal(mandatoryUserFields(requiredFields, user)[0], "name")
+        chai.assert.equal(mandatoryFields(requiredFields, user)[0], "name")
         user.password = ""
-        chai.assert.equal(mandatoryUserFields(requiredFields, user
+        chai.assert.equal(mandatoryFields(requiredFields, user
             ).length, 2);
     
     })

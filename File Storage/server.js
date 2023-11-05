@@ -2,6 +2,7 @@ import express  from "express";
 import bodyParser from "body-parser";
 import userRouter from "./views/user.js"
 import authRouter from "./views/authentication.js";
+import fileOperationsRouter from "./views/fileOperations.js";
 import cors  from "cors"
 
 //ports and ips
@@ -16,6 +17,7 @@ server.use("/public", express.static("public"));
 //adding routes
 server.use(authRouter)
 server.use(userRouter)
+server.use(fileOperationsRouter)
 
 
 //Type Get

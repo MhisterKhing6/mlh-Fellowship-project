@@ -1,15 +1,24 @@
 import { ObjectId } from "mongodb"
 
+/**
+ * generateToken: Generate a unique token that can be use as id
+ * @returns strings of unique id
+ */
 export function generateToken() {
     //get the authentication
     return new ObjectId().toString()
 }
 
-
+/**
+ * manatoryFields: checks if request has all the required fileds need for the operation
+ * @param {array} requiredFields : The fields that are required
+ * @param {object} givenFilds : objects containing the filds to be checked
+ * @returns {array}: indicating missing fields
+ */
 export function mandatoryFields(requiredFields, givenFilds) {
     let missing = [];
     for(const field of requiredFields) {
-        if (!Object.keys(givenFilds).includes(field) || (user[givenFilds] === "")) {
+        if (!Object.keys(givenFilds).includes(field) || (givenFilds[field] === "")) {
             missing.push(field)
         }
     }

@@ -15,7 +15,9 @@ export default class UserController{
             route-type: public
             http-methode: post
             @param {req} : user http request
-            @param (res):  server htpp respons
+            @param (res):  server http respons
+            @return : response object as json payload containing user details or error if request is
+                      not valid
         */ 
         let user = await req.body;
         let notGiven = mandatoryFields(["email", "password", "name"], user);

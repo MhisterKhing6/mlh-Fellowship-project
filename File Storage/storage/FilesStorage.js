@@ -6,6 +6,7 @@ import { promisify } from "util";
 import Jimp from "jimp";
 const readFileAsync = promisify(readFile);
 const writfileAsync = promisify(writeFile);
+const mkdirAsync = promisify(mkdir)
 
 
 
@@ -29,7 +30,7 @@ export class FileStorage {
          @ return : localpath if success and null if error occured 
          */
         try {    //create Folder
-                await mkdir(this.fileFolder, {recursive: true}, ()=>{})
+                await mkdirAsync(this.fileFolder, {recursive: true})
                 //generate file name
                 //Get extension from the filename
                 let extension = this.originalFileName.split(".").pop()
